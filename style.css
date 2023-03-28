@@ -16,3 +16,7 @@ body {
     min-height: 600px;
     background-color: whitesmoke;
 }
+
+#legend {
+    margin-top: 50px;
+}
