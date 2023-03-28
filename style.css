@@ -20,3 +20,9 @@ body {
 #legend {
     margin-top: 50px;
 }
+
+#tooltip {
+    height: auto;
+    width: auto;
+    visibility: hidden;
+}
