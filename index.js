@@ -32,7 +32,18 @@ let drawMap =()=> {
                     return 'lightgreen'
                 }else{
                     return 'green'
-                }
+                };
+            })
+            .attr('data-fips', (countyDataItem) => {
+                return countyDataItem['id'];
+            })
+            .attr('data-education', (countyDataItem) => {
+                let id = countyDataItem['id']
+                let county = educationData.find((item) => {
+                    return item['fips'] === id;
+                })
+                let percentage = county['bachelorsOrHigher'];
+                return percentage;
             })
 };
 
