@@ -9,6 +9,7 @@ let educationData;
 //reference to the svg element
 let canvas = d3.select('#canvas');
 
+//use the gathered data to draw the path
 let drawMap =()=> {
     canvas.selectAll('path')
             .data(countyData)
@@ -16,6 +17,23 @@ let drawMap =()=> {
             .append('path')
             .attr('d', d3.geoPath())
             .attr('class', 'county')
+            // set 4 different fill colors for the counties
+            .attr('fill', (countyDataItem) => {
+                let id = countyDataItem['id'];
+                let county = educationData.find((item) => {
+                    return item['fips'] === id;
+                })
+                let percentage = county['bachelorsOrHigher'];
+                if (percentage <=15){
+                    return 'red'
+                }else if(percentage <= 30){
+                    return 'orange'
+                }else if (percentage <=45){
+                    return 'lightgreen'
+                }else{
+                    return 'green'
+                }
+            })
 };
 
 /*.json is d3's library own fetching data method. It returns a promise. d3 gathers
