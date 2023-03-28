@@ -10,13 +10,14 @@ let educationData;
 let canvas = d3.select('#canvas');
 
 /*.json is d3's library own fetching data method. It returns a promise. d3 gathers
-the information (json string) and returns it as a js object.*/
+the information (JSON string) and returns it as a JS object.*/
 d3.json(countyUrl).then(
     (data, error) => {
         if(error){
             console.log(error)
         }else{
-            countyData = data;
+            //this method formats the data into GeoJSON format
+            countyData = topojson.feature(data, data.objects.counties).features;
 
             d3.json(educationUrl).then(
                 (data, error) => {
