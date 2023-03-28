@@ -9,6 +9,15 @@ let educationData;
 //reference to the svg element
 let canvas = d3.select('#canvas');
 
+let drawMap =()=> {
+    canvas.selectAll('path')
+            .data(countyData)
+            .enter()
+            .append('path')
+            .attr('d', d3.geoPath())
+            .attr('class', 'county')
+};
+
 /*.json is d3's library own fetching data method. It returns a promise. d3 gathers
 the information (JSON string) and returns it as a JS object.*/
 d3.json(countyUrl).then(
@@ -25,6 +34,7 @@ d3.json(countyUrl).then(
                         console.log(error)
                     }else{
                         educationData = data;
+                        drawMap();
                     }
                 }
             )
